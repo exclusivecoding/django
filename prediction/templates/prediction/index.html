@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Disease Prediction</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Heart Disease Prediction</h1>
+        <form method="POST" action="{% url 'prediction' %}">
+            {% csrf_token %}
+            <p>Please Enter the number values </p>
+            <label for="age">Age:</label>
+            <input type="number" name="age" id="age" required><br>
+
+            <label for="sex">Sex:</label>
+            <select name="sex" id="sex" required>
+                <option value="0">Female</option>
+                <option value="1">Male</option>
+            </select><br>
+
+            <label for="chest_pain">Chest Pain Type:</label>
+            <select name="chest_pain" id="chest_pain" required>
+                <option value="1">Typical Angina</option>
+                <option value="2">Atypical Angina</option>
+                <option value="3">Non-anginal Pain</option>
+                <option value="4">Asymptomatic</option>
+            </select><br>
+
+            <label for="resting_bp">Resting Blood Pressure:</label>
+            <input type="number" name="resting_bp" id="resting_bp" required><br>
+
+            <label for="cholesterol">Cholesterol:</label>
+            <input type="number" name="cholesterol" id="cholesterol" required><br>
+
+            <label for="fasting_bs">Fasting Blood Sugar:</label>
+            <select name="fasting_bs" id="fasting_bs" required>
+                <option value="0">Less than 120mg/dL</option>
+                <option value="1">Greater than 120mg/dL</option>
+            </select><br>
+
+            <label for="resting_ecg">Resting Electrocardiogram:</label>
+            <select name="resting_ecg" id="resting_ecg" required>
+                <option value="0">Normal</option>
+                <option value="1">ST-T Wave Abnormality</option>
+                <option value="2">Left Ventricular Hypertrophy</option>
+            </select><br>
+
+            <label for="max_heart_rate">Maximum Heart Rate:</label>
+            <input type="number" name="max_heart_rate" id="max_heart_rate" required><br>
+
+            <label for="exercise_angina">Exercise-Induced Angina:</label>
+            <select name="exercise_angina" id="exercise_angina" required>
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </select><br>
+
+            <label for="oldpeak">Oldpeak (ST Depression):</label>
+            <input type="number" name="oldpeak" id="oldpeak" step="0.1" required><br>
+
+            <label for="st_slope">Slope of the Peak Exercise ST Segment:</label>
+            <select name="st_slope" id="st_slope" required>
+                <option value="1">Upward</option>
+                <option value="2">Flat</option>
+                <option value="3">Downward</option>
+            </select><br>
+
+            <button type="submit">Predict</button>
+        </form>
+
+        {% if result %}
+            <h2>Prediction Result: {{ result }}</h2>
+        {% endif %}
+    </div>
+</body>
+</html>
